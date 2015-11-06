@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.2.0, 2015-11-06
+
+* added: autoupdate from DropBox
+
 ### 1.1.0, 2015-11-06
 
 * added: support for Apache < 2.4, which doesn't support the END flag on rewrite rules

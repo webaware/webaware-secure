@@ -2,7 +2,7 @@
 /*
 Plugin Name: WebAware Secure
 Description: some simple security measures without all the performance traps
-Version: 1.1.0
+Version: 1.2.0
 Author: WebAware
 Author URI: http://webaware.com.au/
 */
@@ -28,6 +28,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+define('WEBAWARE_SECURE_FILE', __FILE__);
 define('WEBAWARE_SECURE_ROOT', __DIR__ . '/');
 define('WEBAWARE_SECURE_NAME', basename(__DIR__) . '/' . basename(__FILE__));
 
