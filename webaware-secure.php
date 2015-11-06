@@ -2,7 +2,7 @@
 /*
 Plugin Name: WebAware Secure
 Description: some simple security measures without all the performance traps
-Version: 1.0.0
+Version: 1.1.0
 Author: WebAware
 Author URI: http://webaware.com.au/
 */
