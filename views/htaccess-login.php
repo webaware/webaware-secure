@@ -2,6 +2,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{ENV:REDIRECT_STATUS} 200
+RewriteCond %{REQUEST_URI} /wp-login\.php
 RewriteRule . - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^<?php echo $options['login_slug']; ?>/?$ wp-login.php [QSA,L]
