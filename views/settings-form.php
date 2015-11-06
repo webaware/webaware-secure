@@ -5,6 +5,7 @@
 <style>
 #login_slug_htaccess {
 	width: 90%;
+	font-family: Consolas, Monaco, monospace;
 }
 </style>
 
@@ -57,8 +58,16 @@
 					<br/><em>enter the new login page slug, e.g. 'login-page'</em>
 					<?php if (!empty($login_htaccess)): ?>
 					<p>Please copy this code to your .htaccess file:</p>
-					<textarea id="login_slug_htaccess" readonly="readonly" cols="40" rows="9"><?php echo $login_htaccess; ?></textarea>
+					<textarea id="login_slug_htaccess" readonly="readonly" cols="40" rows="10"><?php echo $login_htaccess; ?></textarea>
 					<?php endif; ?>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row">Apache version</th>
+				<td>
+					<input type="checkbox" name="webaware_secure[apache_version]" id="webaware_secure_apache_version" value="2.4" <?php checked($options['apache_version'], '2.4'); ?> />
+					<label for="webaware_secure_apache_version">Apache 2.4 or higher (changes the .htaccess rules for login location)</label>
 				</td>
 			</tr>
 

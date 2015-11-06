@@ -49,7 +49,13 @@ class WebAwareSecureAdmin {
 
 		if (!empty($options['login_slug'])) {
 			ob_start();
-			require WEBAWARE_SECURE_ROOT . 'views/htaccess-login.php';
+			if (isset($options['apache_version']) && $options['apache_version'] === '2.4') {
+				require WEBAWARE_SECURE_ROOT . 'views/htaccess-login-2.4.php';
+			}
+			else {
+				// @link http://stackoverflow.com/a/12823245/911083 how to simulate END flag in Apache 2.2
+				require WEBAWARE_SECURE_ROOT . 'views/htaccess-login.php';
+			}
 			$login_htaccess = ob_get_clean();
 		}
 
@@ -69,6 +75,7 @@ class WebAwareSecureAdmin {
 		$output['auto_update_plugin']	= empty($input['auto_update_plugin']) ? 0 : 1;
 		$output['auto_update_theme']	= empty($input['auto_update_theme']) ? 0 : 1;
 		$output['login_slug']			= empty($input['login_slug']) ? '' : trim(trim($input['login_slug']), '/');
+		$output['apache_version']		= empty($input['apache_version']) ? '' : trim($input['apache_version']);
 
 		return $output;
 	}

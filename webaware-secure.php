@@ -43,6 +43,7 @@ function webaware_secure_options() {
 		'auto_update_plugin'	=> 1,
 		'auto_update_theme'		=> 1,
 		'login_slug'			=> '',
+		'apache_version'		=> '',
 	);
 
 	return get_option(WEBAWARE_SECURE_OPTIONS, $defaults);
