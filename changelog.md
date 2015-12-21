@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.3.0, 2015-12-21
+
+* added: disable X-Pinkback also disables pingback link for Enfold and other themes from Kriesi
+
 ### 1.2.0, 2015-11-06
 
 * added: autoupdate from DropBox

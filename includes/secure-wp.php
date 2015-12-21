@@ -25,6 +25,9 @@ if (!empty($options['disable_pingback'])) {
 		unset($headers['X-Pingback']);
 		return $headers;
 	});
+
+	// Enfold and other themes from Kriesi
+	add_filter('avf_pingback_head_tag', '__return_empty_string');
 }
 
 /**
