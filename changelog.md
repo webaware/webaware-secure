@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### 1.4.0, 2016-07-27
+
+* added: disable RSD link
+* added: disable wlwmanifest link
+
 ### 1.3.0, 2015-12-21
 
 * added: disable X-Pinkback also disables pingback link for Enfold and other themes from Kriesi

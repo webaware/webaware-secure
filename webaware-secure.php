@@ -1,14 +1,15 @@
 <?php
 /*
 Plugin Name: WebAware Secure
+Plugin URI: https://github.com/webaware/webaware-secure
 Description: some simple security measures without all the performance traps
-Version: 1.3.0
+Version: 1.4.0
 Author: WebAware
 Author URI: http://webaware.com.au/
 */
 
 /*
-copyright (c) 2014-2015 WebAware Pty Ltd (email : support@webaware.com.au)
+copyright (c) 2014-2016 WebAware Pty Ltd (email : support@webaware.com.au)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -41,6 +42,8 @@ function webaware_secure_options() {
 	static $defaults = array(
 		'disable_xmlrpc'		=> 1,
 		'disable_pingback'		=> 1,
+		'disable_rsd'			=> 1,
+		'disable_wlwmanifest'	=> 1,
 		'auto_update_plugin'	=> 1,
 		'auto_update_theme'		=> 1,
 		'login_slug'			=> '',
