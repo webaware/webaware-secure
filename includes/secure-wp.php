@@ -16,6 +16,20 @@ if (!empty($options['disable_xmlrpc'])) {
 }
 
 /**
+* disable RSD link, not required on most websites
+*/
+if (!empty($options['disable_rsd'])) {
+	remove_action('wp_head', 'rsd_link');
+}
+
+/**
+* disable wlwmanifest link, not required on most websites
+*/
+if (!empty($options['disable_wlwmanifest'])) {
+	remove_action('wp_head', 'wlwmanifest_link');
+}
+
+/**
 * stop sending X-Pingback headers
 * @param array $filters
 * @return array

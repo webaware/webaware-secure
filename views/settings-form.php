@@ -36,6 +36,22 @@
 			</tr>
 
 			<tr valign="top">
+				<th scope="row">Disable RSD link</th>
+				<td>
+					<input type="checkbox" name="webaware_secure[disable_rsd]" id="webaware_secure_disable_rsd" value="1" <?php checked($options['disable_rsd']); ?> />
+					<label for="webaware_secure_disable_rsd">not required on most websites</label>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row">Disable wlwmanifest link</th>
+				<td>
+					<input type="checkbox" name="webaware_secure[disable_wlwmanifest]" id="webaware_secure_disable_wlwmanifest" value="1" <?php checked($options['disable_wlwmanifest']); ?> />
+					<label for="webaware_secure_disable_wlwmanifest">not required on most websites</label>
+				</td>
+			</tr>
+
+			<tr valign="top">
 				<th scope="row">Allow plugin auto-update</th>
 				<td>
 					<input type="checkbox" name="webaware_secure[auto_update_plugin]" id="webaware_secure_auto_update_plugin" value="1" <?php checked($options['auto_update_plugin']); ?> />
