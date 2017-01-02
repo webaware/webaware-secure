@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 class WebAwareSecureAdmin {
 
 	const TRANSIENT_UPDATE_INFO		= 'webaware_secure_update_info';
-	const URL_UPDATE_INFO			= 'https://dl.dropboxusercontent.com/u/26305751/webaware-secure/webaware-secure-latest.json';
+	const URL_UPDATE_INFO			= 'https://updates.webaware.net.au/webaware-secure/webaware-secure-latest.json';
 
 	public function __construct() {
 		add_action('admin_init', array($this, 'adminInit'));

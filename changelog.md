@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.4.1, 2017-01-02
+
+* changed: readme.txt for auto-update moved from Dropbox Public folder due to changes in Dropbox service coming in March
+
 ### 1.4.0, 2016-07-27
 
 * added: disable RSD link
