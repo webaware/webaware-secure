@@ -5,7 +5,7 @@ Plugin URI: https://github.com/webaware/webaware-secure
 Description: some simple security measures without all the performance traps
 Version: 1.4.1
 Author: WebAware
-Author URI: http://webaware.com.au/
+Author URI: https://shop.webaware.com.au/
 */
 
 /*
