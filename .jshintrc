@@ -1,0 +1,15 @@
+{
+	"es3": true,
+	"immed": true,
+	"latedef": "nofunc",
+	"nonew": true,
+	"undef": true,
+
+	// globals
+	"browser": true,
+	"jquery": true,
+	"globals": {
+		"ajaxurl": false,
+		"module": false
+	}
+}
