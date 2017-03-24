@@ -69,6 +69,15 @@ if (!empty($options['login_slug'])) {
 		}
 		return $url;
 	});
+
+	add_filter('logout_redirect', function($redirect_to, $requested_redirect_to) {
+		if ($requested_redirect_to === '') {
+			$options = webaware_secure_options();
+			$redirect_to = home_url(trailingslashit($options['login_slug']) . '?loggedout=true');
+		}
+
+		return $redirect_to;
+	}, 10, 2);
 }
 
 unset($options);
