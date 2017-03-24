@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.4.2, 2017-03-24
+
+* fixed: logout was redirecting to invalid page
+
 ### 1.4.1, 2017-01-02
 
 * changed: readme.txt for auto-update moved from Dropbox Public folder due to changes in Dropbox service coming in March

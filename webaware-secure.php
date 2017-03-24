@@ -3,7 +3,7 @@
 Plugin Name: WebAware Secure
 Plugin URI: https://github.com/webaware/webaware-secure
 Description: some simple security measures without all the performance traps
-Version: 1.4.1
+Version: 1.4.2
 Author: WebAware
 Author URI: https://shop.webaware.com.au/
 */
