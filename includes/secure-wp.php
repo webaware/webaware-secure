@@ -62,13 +62,20 @@ if (empty($options['auto_update_plugin'])) {
 * redirect login script
 */
 if (!empty($options['login_slug'])) {
-	add_filter('site_url', function($url) {
-		if (strpos(basename($url), 'wp-login.php') === 0) {
+
+	function webaware_secure_site_url($url) {
+		list($bare_path) = explode('?', $url);
+		$bare_path = basename($bare_path);
+
+		if ($bare_path === 'wp-login.php') {
 			$options = webaware_secure_options();
 			$url = str_replace('wp-login.php', trailingslashit($options['login_slug']), $url);
 		}
 		return $url;
-	});
+	}
+
+	add_filter('site_url', 'webaware_secure_site_url');
+	add_filter('network_site_url', 'webaware_secure_site_url');
 
 	add_filter('logout_redirect', function($redirect_to, $requested_redirect_to) {
 		if ($requested_redirect_to === '') {
