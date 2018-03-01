@@ -1,6 +1,6 @@
 {
   "name": "webaware-secure",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "some simple security measures without all the performance traps",
   "main": "Gruntfile.js",
   "devDependencies": {

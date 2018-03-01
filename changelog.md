@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.4.3, 2018-03-01
+
+* fixed: lost password link was still linking to wp-login.php on some sites
+
 ### 1.4.2, 2017-03-24
 
 * fixed: logout was redirecting to invalid page
