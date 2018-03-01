@@ -30,17 +30,13 @@ module.exports = function (grunt) {
 			}
 		},
 
-		jshint: {
+		eslint: {
 			all: [
 				"Gruntfile.js",
 				"js/*.js",
-				"!js/*.min.js"
-			],
-			options: {
-				jshintrc: ".jshintrc",
-				force: true
-			}
-		}
+				"!js/*.min.js",
+			]
+		},
 
 	});
 
