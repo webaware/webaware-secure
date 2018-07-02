@@ -119,6 +119,7 @@ class WebAwareSecureAdmin {
 			$update->slug			= $latest->slug;
 			$update->new_version	= $latest->version;
 			$update->package		= $latest->download_link;
+			$update->upgrade_notice	= $latest->upgrade_notice;
 
 			$plugins->response[WEBAWARE_SECURE_NAME] = $update;
 		}
