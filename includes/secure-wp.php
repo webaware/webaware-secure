@@ -85,6 +85,16 @@ if (!empty($options['login_slug'])) {
 
 		return $redirect_to;
 	}, 10, 2);
+
+	add_filter('lostpassword_redirect', function($url) {
+		if (empty($url)) {
+			$options = webaware_secure_options();
+			$url = home_url(trailingslashit($options['login_slug']) . '?checkemail=confirm');
+		}
+
+		return $url;
+	}, 10, 2);
+
 }
 
 unset($options);
