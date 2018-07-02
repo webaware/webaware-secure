@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.4.4, 2018-07-02
+
+* fixed: return to login after lost password has wp-login.php
+
 ### 1.4.3, 2018-03-01
 
 * fixed: lost password link was still linking to wp-login.php on some sites
