@@ -25,6 +25,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					cwd: "./dist/",
+					date: new Date(),
 					src: [ "<%= pkg.name %>/**" ]
 				}]
 			}
@@ -43,7 +44,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks("grunt-contrib-compress");
 	grunt.loadNpmTasks("grunt-contrib-copy");
-	grunt.loadNpmTasks("grunt-contrib-jshint");
+	grunt.loadNpmTasks("grunt-eslint");
 
 	grunt.registerTask("release", ["clean","copy","compress"]);
 
