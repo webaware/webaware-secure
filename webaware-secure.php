@@ -2,6 +2,7 @@
 /*
 Plugin Name: WebAware Secure
 Plugin URI: https://github.com/webaware/webaware-secure
+Update URI: webaware-secure
 Description: some simple security measures without all the performance traps
 Version: 1.5.0
 Author: WebAware
@@ -32,41 +33,8 @@ if (!defined('ABSPATH')) {
 define('WEBAWARE_SECURE_FILE', __FILE__);
 define('WEBAWARE_SECURE_ROOT', __DIR__ . '/');
 define('WEBAWARE_SECURE_NAME', basename(__DIR__) . '/' . basename(__FILE__));
+define('WEBAWARE_SECURE_VERSION', '1.5.0');
 
 const WEBAWARE_SECURE_OPTIONS = 'webaware_secure';
 
-/**
-* get the plugin options
-*/
-function webaware_secure_options() {
-	static $defaults = [
-		'disable_xmlrpc'		=> 1,
-		'disable_pingback'		=> 1,
-		'disable_rsd'			=> 1,
-		'disable_wlwmanifest'	=> 1,
-		'disable_iter_users'	=> 1,
-		'auto_update_plugin'	=> 1,
-		'auto_update_theme'		=> 1,
-		'login_slug'			=> '',
-		'apache_version'		=> '2.4',
-	];
-
-	return wp_parse_args(get_option(WEBAWARE_SECURE_OPTIONS, []), $defaults);
-}
-
-/**
-* load secure steps, unless requested not to
-*/
-if (!defined('WEBAWARE_SECURE_IGNORE')) {
-	require WEBAWARE_SECURE_ROOT . '/includes/secure-wp.php';
-}
-
-/**
- * hook in the admin and plugin update manager
- */
-add_action('init', function() : void {
-	if (is_admin() || wp_doing_cron() || (defined('WP_CLI') && WP_CLI)) {
-		require WEBAWARE_SECURE_ROOT . '/includes/class.WebAwareSecureAdmin.php';
-		new WebAwareSecureAdmin();
-	}
-});
+require WEBAWARE_SECURE_ROOT . '/includes/bootstrap.php';

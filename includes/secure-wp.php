@@ -1,10 +1,11 @@
 <?php
+namespace webawareau\secure;
 
 if (!defined('ABSPATH')) {
 	exit;
 }
 
-$options = webaware_secure_options();
+$options = get_options();
 
 /**
 * disable XML-RPC protocol, not required on most websites and is a security risk!
@@ -94,23 +95,23 @@ if (empty($options['auto_update_plugin'])) {
 */
 if (!empty($options['login_slug'])) {
 
-	function webaware_secure_site_url($url) {
+	function maybe_switch_login_url($url) {
 		list($bare_path) = explode('?', $url);
 		$bare_path = basename($bare_path);
 
 		if ($bare_path === 'wp-login.php') {
-			$options = webaware_secure_options();
+			$options = get_options();
 			$url = str_replace('wp-login.php', trailingslashit($options['login_slug']), $url);
 		}
 		return $url;
 	}
 
-	add_filter('site_url', 'webaware_secure_site_url');
-	add_filter('network_site_url', 'webaware_secure_site_url');
+	add_filter('site_url', __NAMESPACE__ . '\\maybe_switch_login_url');
+	add_filter('network_site_url', __NAMESPACE__ . '\\maybe_switch_login_url');
 
 	add_filter('logout_redirect', function($redirect_to, $requested_redirect_to) {
 		if ($requested_redirect_to === '') {
-			$options = webaware_secure_options();
+			$options = get_options();
 			$redirect_to = home_url(trailingslashit($options['login_slug']) . '?loggedout=true');
 		}
 
@@ -119,7 +120,7 @@ if (!empty($options['login_slug'])) {
 
 	add_filter('lostpassword_redirect', function($url) {
 		if (empty($url)) {
-			$options = webaware_secure_options();
+			$options = get_options();
 			$url = home_url(trailingslashit($options['login_slug']) . '?checkemail=confirm');
 		}
 
