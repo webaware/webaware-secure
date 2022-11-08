@@ -16,7 +16,7 @@ all:
 
 zip: $(ZIP)
 
-$(ZIP): $(SRC_PHP) static/js/*
+$(ZIP): $(SRC_PHP) changelog.md
 	rm -rf .dist
 	mkdir .dist
 	git archive HEAD --prefix=$(PKG_NAME)/ --format=zip -9 -o $(ZIP)

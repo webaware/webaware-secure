@@ -3,13 +3,13 @@
 Plugin Name: WebAware Secure
 Plugin URI: https://github.com/webaware/webaware-secure
 Description: some simple security measures without all the performance traps
-Version: 1.4.4
+Version: 1.5.0
 Author: WebAware
 Author URI: https://shop.webaware.com.au/
 */
 
 /*
-copyright (c) 2014-2018 WebAware Pty Ltd (email : support@webaware.com.au)
+copyright (c) 2014-2022 WebAware Pty Ltd (email : support@webaware.com.au)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as

@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.5.0, 2022-11-08
+
+* added: prevent common login/author iteration attempts
+
 ### 1.4.4, 2018-07-02
 
 * fixed: return to login after lost password has wp-login.php
