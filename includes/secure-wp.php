@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 $options = webaware_secure_options();
 
 /**
@@ -27,6 +31,33 @@ if (!empty($options['disable_rsd'])) {
 */
 if (!empty($options['disable_wlwmanifest'])) {
 	remove_action('wp_head', 'wlwmanifest_link');
+}
+
+// maybe disable iterating over users
+if (!empty($options['disable_iter_users'])) {
+
+	/**
+	 * disable iterating WordPress users: /?author=1
+	 */
+	add_filter('redirect_canonical', function($redirect_to) {
+		if (is_author() && ctype_digit($_GET['author'] ?? '')) {
+			wp_die('Not permitted.', 403);
+		}
+		return $redirect_to;
+	});
+
+	/**
+	 * disable iterating WordPress users:
+	 * /wp-json/wp/v2/users
+	 * /wp-json/wp/v2/users/1
+	 */
+	add_filter('rest_endpoints', function(array $endpoints) : array {
+		unset($endpoints['/wp/v2/users']);
+		unset($endpoints['/wp/v2/users/(?P<id>[\\d]+)']);
+
+		return $endpoints;
+	});
+
 }
 
 /**

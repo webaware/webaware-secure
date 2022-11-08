@@ -91,6 +91,7 @@ class WebAwareSecureAdmin {
 		$output['disable_pingback']		= empty($input['disable_pingback']) ? 0 : 1;
 		$output['disable_rsd']			= empty($input['disable_rsd']) ? 0 : 1;
 		$output['disable_wlwmanifest']	= empty($input['disable_wlwmanifest']) ? 0 : 1;
+		$output['disable_iter_users']	= empty($input['disable_iter_users']) ? 0 : 1;
 		$output['auto_update_plugin']	= empty($input['auto_update_plugin']) ? 0 : 1;
 		$output['auto_update_theme']	= empty($input['auto_update_theme']) ? 0 : 1;
 		$output['login_slug']			= empty($input['login_slug']) ? '' : trim(trim($input['login_slug']), '/');

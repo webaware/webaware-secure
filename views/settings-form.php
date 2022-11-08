@@ -52,6 +52,14 @@
 			</tr>
 
 			<tr valign="top">
+				<th scope="row">Disable iterating users</th>
+				<td>
+					<input type="checkbox" name="webaware_secure[disable_iter_users]" id="webaware_secure_disable_iter_users" value="1" <?php checked($options['disable_iter_users']); ?> />
+					<label for="webaware_secure_disable_iter_users">not required on most websites</label>
+				</td>
+			</tr>
+
+			<tr valign="top">
 				<th scope="row">Allow plugin auto-update</th>
 				<td>
 					<input type="checkbox" name="webaware_secure[auto_update_plugin]" id="webaware_secure_auto_update_plugin" value="1" <?php checked($options['auto_update_plugin']); ?> />

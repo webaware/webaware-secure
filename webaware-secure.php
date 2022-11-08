@@ -44,13 +44,14 @@ function webaware_secure_options() {
 		'disable_pingback'		=> 1,
 		'disable_rsd'			=> 1,
 		'disable_wlwmanifest'	=> 1,
+		'disable_iter_users'	=> 1,
 		'auto_update_plugin'	=> 1,
 		'auto_update_theme'		=> 1,
 		'login_slug'			=> '',
-		'apache_version'		=> '',
+		'apache_version'		=> '2.4',
 	];
 
-	return get_option(WEBAWARE_SECURE_OPTIONS, $defaults);
+	return wp_parse_args(get_option(WEBAWARE_SECURE_OPTIONS, []), $defaults);
 }
 
 /**
