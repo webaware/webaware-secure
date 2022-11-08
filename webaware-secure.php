@@ -39,7 +39,7 @@ const WEBAWARE_SECURE_OPTIONS = 'webaware_secure';
 * get the plugin options
 */
 function webaware_secure_options() {
-	static $defaults = array(
+	static $defaults = [
 		'disable_xmlrpc'		=> 1,
 		'disable_pingback'		=> 1,
 		'disable_rsd'			=> 1,
@@ -48,7 +48,7 @@ function webaware_secure_options() {
 		'auto_update_theme'		=> 1,
 		'login_slug'			=> '',
 		'apache_version'		=> '',
-	);
+	];
 
 	return get_option(WEBAWARE_SECURE_OPTIONS, $defaults);
 }

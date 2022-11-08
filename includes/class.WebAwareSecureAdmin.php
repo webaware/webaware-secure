@@ -10,18 +10,18 @@ class WebAwareSecureAdmin {
 	const URL_UPDATE_INFO			= 'https://updates.webaware.net.au/webaware-secure/webaware-secure-latest.json';
 
 	public function __construct() {
-		add_action('admin_init', array($this, 'adminInit'));
-		add_action('admin_menu', array($this, 'adminMenu'));
-		add_action('plugin_action_links_' . WEBAWARE_SECURE_NAME, array($this, 'pluginActionLinks'));
+		add_action('admin_init', [$this, 'adminInit']);
+		add_action('admin_menu', [$this, 'adminMenu']);
+		add_action('plugin_action_links_' . WEBAWARE_SECURE_NAME, [$this, 'pluginActionLinks']);
 
 		// check for plugin updates
-		add_filter('pre_set_site_transient_update_plugins', array($this, 'checkPluginUpdates'));
-		add_filter('plugins_api', array($this, 'getPluginInfo'), 10, 3);
-		add_action('plugins_loaded', array($this, 'clearPluginInfo'));
+		add_filter('pre_set_site_transient_update_plugins', [$this, 'checkPluginUpdates']);
+		add_filter('plugins_api', [$this, 'getPluginInfo'], 10, 3);
+		add_action('plugins_loaded', [$this, 'clearPluginInfo']);
 
 		// on multisite, must add new version notification ourselves...
 		if (is_multisite() && !is_network_admin()) {
-			add_action('after_plugin_row_' . WEBAWARE_SECURE_NAME, array($this, 'showUpdateNotification'), 10, 2);
+			add_action('after_plugin_row_' . WEBAWARE_SECURE_NAME, [$this, 'showUpdateNotification'], 10, 2);
 		}
 	}
 
@@ -30,7 +30,7 @@ class WebAwareSecureAdmin {
 	*/
 	public function adminInit() {
 		add_settings_section(WEBAWARE_SECURE_OPTIONS, false, false, WEBAWARE_SECURE_OPTIONS);
-		register_setting(WEBAWARE_SECURE_OPTIONS, WEBAWARE_SECURE_OPTIONS, array($this, 'settingsValidate'));
+		register_setting(WEBAWARE_SECURE_OPTIONS, WEBAWARE_SECURE_OPTIONS, [$this, 'settingsValidate']);
 
 		if (!empty($_REQUEST['webaware_secure_changelog']) && !empty($_REQUEST['plugin']) && !empty($_REQUEST['slug'])) {
 			$this->showChangelog();
@@ -41,7 +41,7 @@ class WebAwareSecureAdmin {
 	* admin menu items
 	*/
 	public function adminMenu() {
-		add_options_page('WebAware Secure', 'Simple Security', 'manage_options', 'webaware-secure', array($this, 'settingsPage'));
+		add_options_page('WebAware Secure', 'Simple Security', 'manage_options', 'webaware-secure', [$this, 'settingsPage']);
 	}
 
 	/**
@@ -85,7 +85,7 @@ class WebAwareSecureAdmin {
 	* @return array
 	*/
 	public function settingsValidate($input) {
-		$output = array();
+		$output = [];
 
 		$output['disable_xmlrpc']		= empty($input['disable_xmlrpc']) ? 0 : 1;
 		$output['disable_pingback']		= empty($input['disable_pingback']) ? 0 : 1;
@@ -218,8 +218,8 @@ class WebAwareSecureAdmin {
 		if (empty($info)) {
 			delete_site_transient(self::TRANSIENT_UPDATE_INFO);
 
-			$url = add_query_arg(array('v' => time()), self::URL_UPDATE_INFO);
-			$response = wp_remote_get($url, array('timeout' => 60));
+			$url = add_query_arg(['v' => time()], self::URL_UPDATE_INFO);
+			$response = wp_remote_get($url, ['timeout' => 15]);
 
 			if (is_wp_error($response)) {
 				return false;
@@ -230,7 +230,7 @@ class WebAwareSecureAdmin {
 				$info = json_decode($response['body']);
 
 				if ($info) {
-					$sections = array();
+					$sections = [];
 					foreach ($info->sections as $name => $data) {
 						$sections[$name] = $data;
 					}
@@ -249,7 +249,7 @@ class WebAwareSecureAdmin {
 	*/
 	public function showChangelog() {
 		if (!current_user_can('update_plugins')) {
-			wp_die(__('You do not have sufficient permissions to update plugins for this site.'), __('Error'), array('response' => 403));
+			wp_die(__('You do not have sufficient permissions to update plugins for this site.'), __('Error'), ['response' => 403]);
 		}
 
 		global $tab, $body_id;
