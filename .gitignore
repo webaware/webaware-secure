@@ -1,3 +1,6 @@
-.svn
-dist
-node_modules
+/.svn
+/.vscode
+/.dist
+/bin
+/node_modules
+/vendor
