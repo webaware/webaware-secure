@@ -4,7 +4,7 @@ Plugin Name: WebAware Secure
 Plugin URI: https://github.com/webaware/webaware-secure
 Update URI: webaware-secure
 Description: some simple security measures without all the performance traps
-Version: 1.5.0
+Version: 1.5.0.1
 Author: WebAware
 Author URI: https://shop.webaware.com.au/
 */
@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
 define('WEBAWARE_SECURE_FILE', __FILE__);
 define('WEBAWARE_SECURE_ROOT', __DIR__ . '/');
 define('WEBAWARE_SECURE_NAME', basename(__DIR__) . '/' . basename(__FILE__));
-define('WEBAWARE_SECURE_VERSION', '1.5.0');
+define('WEBAWARE_SECURE_VERSION', '1.5.0.1');
 
 const WEBAWARE_SECURE_OPTIONS = 'webaware_secure';
 

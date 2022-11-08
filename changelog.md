@@ -4,6 +4,7 @@
 
 ### 1.5.0, 2022-11-08
 
+* changed: updated admin and plugin updater
 * added: prevent common login/author iteration attempts
 
 ### 1.4.4, 2018-07-02
