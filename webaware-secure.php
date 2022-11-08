@@ -62,9 +62,11 @@ if (!defined('WEBAWARE_SECURE_IGNORE')) {
 }
 
 /**
-* launch admin for settings, if required
-*/
-if (is_admin() && !(defined('DOING_AJAX') && DOING_AJAX)) {
-	require WEBAWARE_SECURE_ROOT . '/includes/class.WebAwareSecureAdmin.php';
-	new WebAwareSecureAdmin();
-}
+ * hook in the admin and plugin update manager
+ */
+add_action('init', function() : void {
+	if (is_admin() || wp_doing_cron() || (defined('WP_CLI') && WP_CLI)) {
+		require WEBAWARE_SECURE_ROOT . '/includes/class.WebAwareSecureAdmin.php';
+		new WebAwareSecureAdmin();
+	}
+});
