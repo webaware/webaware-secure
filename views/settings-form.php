@@ -1,5 +1,7 @@
 <?php
-// settings form
+if (!defined('ABSPATH')) {
+	exit;
+}
 ?>
 
 <style>
@@ -10,11 +12,11 @@
 </style>
 
 <div class="wrap">
-	<h2>Simple security settings</h2>
+	<h1>Simple security settings</h1>
 
 	<p>some simple security measures without all the performance traps</p>
 
-	<form action="<?php echo admin_url('options.php'); ?>" method="POST">
+	<form action="<?= admin_url('options.php'); ?>" method="POST">
 		<?php settings_fields(WEBAWARE_SECURE_OPTIONS); ?>
 
 		<table class="form-table">
@@ -78,11 +80,11 @@
 			<tr valign="top">
 				<th scope="row">Change login location</th>
 				<td>
-					<input type="text" class="regular-text" name="webaware_secure[login_slug]" id="webaware_secure_login_slug" value="<?php echo esc_attr($options['login_slug']); ?>" />
+					<input type="text" class="regular-text" name="webaware_secure[login_slug]" id="webaware_secure_login_slug" value="<?= esc_attr($options['login_slug']); ?>" />
 					<br/><em>enter the new login page slug, e.g. 'login-page'</em>
 					<?php if (!empty($login_htaccess)): ?>
 					<p>Please copy this code to your .htaccess file:</p>
-					<textarea id="login_slug_htaccess" readonly="readonly" cols="40" rows="10"><?php echo $login_htaccess; ?></textarea>
+					<textarea id="login_slug_htaccess" readonly="readonly" cols="40" rows="10"><?= $login_htaccess; ?></textarea>
 					<?php endif; ?>
 				</td>
 			</tr>
