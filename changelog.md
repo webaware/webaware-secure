@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.5.1, 2023-03-07
+
+* changed: allow iterating WP users if authenticated and permitted to edit posts
+
 ### 1.5.0, 2022-11-08
 
 * changed: updated admin and plugin updater

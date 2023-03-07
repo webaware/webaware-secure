@@ -48,13 +48,15 @@ if (!empty($options['disable_iter_users'])) {
 	});
 
 	/**
-	 * disable iterating WordPress users:
+	 * disable iterating WordPress users unless authenticated as a Contributor or above
 	 * /wp-json/wp/v2/users
 	 * /wp-json/wp/v2/users/1
 	 */
 	add_filter('rest_endpoints', function(array $endpoints) : array {
-		unset($endpoints['/wp/v2/users']);
-		unset($endpoints['/wp/v2/users/(?P<id>[\\d]+)']);
+		if (!current_user_can('edit_posts')) {
+			unset($endpoints['/wp/v2/users']);
+			unset($endpoints['/wp/v2/users/(?P<id>[\\d]+)']);
+		}
 
 		return $endpoints;
 	});
