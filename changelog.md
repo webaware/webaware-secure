@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.5.2, 2023-12-18
+
+* fixed: automatic updates on multisite websites
+
 ### 1.5.1, 2023-03-07
 
 * changed: allow iterating WP users if authenticated and permitted to edit posts
