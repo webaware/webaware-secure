@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 /**
 * manage automatic updates and notifications
 */
-class Updater {
+final class Updater {
 
 	private string $name;			// plugin name in WordPress
 	private string $file;			// plugin base file path
@@ -31,11 +31,12 @@ class Updater {
 		// check for plugin updates
 		add_filter('pre_set_site_transient_update_plugins', [$this, 'checkPluginUpdates']);
 		add_filter('plugins_api', [$this, 'getPluginInfo'], 10, 3);
-		add_action('admin_init', [$this, 'maybeShowChangelog']);
+		add_action('admin_init', [$this, 'showChangelog']);
 
-		// on multisite, must add new version notification ourselves...
+		// on multisite, must add new version notification ourselves and override link for View details
 		if (is_multisite() && !is_network_admin()) {
 			add_action('after_plugin_row_' . $this->name, [$this, 'showUpdateNotification'], 10, 2);
+			add_filter('network_admin_url', [$this, 'maybeFixDetailsLink'], 10, 2);
 		}
 	}
 
@@ -72,23 +73,23 @@ class Updater {
 
 	/**
 	* return plugin info for update pages, plugins list
-	* @param boolean $false
+	 * @param boolean $result
 	* @param array $action
 	* @param object $args
 	* @return bool|object
 	*/
-	public function getPluginInfo($false, $action, $args) {
+	public function getPluginInfo($result, $action, $args) {
 		if (isset($args->slug) && $args->slug === basename($this->name, '.php')) {
 			return $this->getLatestVersionInfo();
 		}
 
-		return $false;
+		return $result;
 	}
 
 	/**
 	* if user asks to force an update check, clear our cached plugin info
 	*/
-	public function maybeClearPluginInfo() {
+	public function maybeClearPluginInfo() : void {
 		global $pagenow;
 
 		if (!empty($_GET['force-check']) && !empty($pagenow) && $pagenow === 'update-core.php') {
@@ -101,7 +102,7 @@ class Updater {
 	* @param string $file
 	* @param array $plugin
 	*/
-	public function showUpdateNotification($file, $plugin) {
+	public function showUpdateNotification($file, $plugin) : void {
 		if (!current_user_can('update_plugins')) {
 			return;
 		}
@@ -116,12 +117,13 @@ class Updater {
 		$info = $this->getLatestVersionInfo();
 
 		if ($info && version_compare($current['Version'], $info->new_version, '<')) {
-			$changelog_link = self_admin_url("index.php?{$this->slug}-changelog=1&plugin={$info->slug}&slug={$info->slug}&TB_iframe=true");
+			$changelog_link = $this->getChangelogLink();
 
 			// build a plugin list row, with update notification
 			$wp_list_table = _get_list_table('WP_Plugins_List_Table');
 			$plugin_name   = esc_html($info->name);
 			$plugin_slug   = esc_html($info->slug);
+			$update_file   = esc_html(plugin_basename($this->file));
 			$new_version   = esc_html($info->new_version);
 
 			$view   = empty($info->download_link) ? 'details' : 'upgrade';
@@ -129,6 +131,32 @@ class Updater {
 			$root = dirname($this->file);
 			include "{$root}/views/admin-plugin-update-{$view}.php";
 		}
+	}
+
+	/**
+	 * maybe fix the "View details" link for the plugin, when on multisite
+	 * @param string $url
+	 * @param string $path
+	 * @return string
+	 */
+	public function maybeFixDetailsLink($url, $path) {
+		if (strpos($path, 'plugin-install.php?') === 0 && strpos($path, "plugin={$this->slug}&") !== false) {
+			$url = $this->getChangelogLink();
+		}
+		return $url;
+	}
+
+	/**
+	 * get link for the changelog pop-up
+	 */
+	private function getChangelogLink() : string {
+		$args = [
+			'tab'						=> 'plugin-information',
+			'plugin'					=> urlencode($this->slug),
+			'section'					=> 'changelog',
+			'TB_iframe'					=> 'true',
+		];
+		return add_query_arg($args, self_admin_url('plugin-install.php'));
 	}
 
 	/**
@@ -186,23 +214,22 @@ class Updater {
 	/**
 	 * if the changelog was requested, show it
 	 */
-	public function maybeShowChangelog() {
-		if (!empty($_REQUEST["{$this->slug}-changelog"]) && !empty($_REQUEST['plugin']) && !empty($_REQUEST['slug'])) {
-			$this->showChangelog();
+	public function showChangelog() : void {
+		if (empty($_REQUEST['plugin']) || empty($_REQUEST['tab'])) {
+			return;
 		}
-	}
 
-	/**
-	* pop-up the plugin changelog
-	*/
-	public function showChangelog() {
+		if ($_REQUEST['plugin'] !== $this->slug || $_REQUEST['tab'] !== 'plugin-information') {
+			return;
+		}
+
 		if (!current_user_can('update_plugins')) {
 			wp_die(translate('You do not have sufficient permissions to update plugins for this site.'), translate('Error'), ['response' => 403]);
 		}
 
-		global $tab, $body_id;
+		global $tab, $body_id, $hook_suffix;
 		$body_id = $tab = 'plugin-information';
-		$_REQUEST['section'] = 'changelog';
+		$hook_suffix = 'plugin-install-php';
 
 		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
