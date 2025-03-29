@@ -7,10 +7,12 @@ Description: some simple security measures without all the performance traps
 Version: 1.5.2
 Author: WebAware
 Author URI: https://shop.webaware.com.au/
+Requires PHP: 7.4
+Requires at least: 4.9
 */
 
 /*
-copyright (c) 2014-2023 WebAware Pty Ltd (email : support@webaware.com.au)
+copyright (c) 2014-2025 WebAware Pty Ltd (email : support@webaware.com.au)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
