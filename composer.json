@@ -1,12 +1,13 @@
 {
 	"require-dev": {
 		"phpcompatibility/php-compatibility": "*",
-		"phpcsstandards/php_codesniffer": "*",
+        "squizlabs/php_codesniffer": "*",
 		"phpcsstandards/phpcsextra": "*"
 	},
 	"prefer-stable" : true,
 	"config": {
 		"allow-plugins": {
+            "composer/installers": true,
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	}
