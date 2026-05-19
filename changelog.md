@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.5.3, 2026-05-19
+
+* fixed: compatibility with plugin auto-updates
+
 ### 1.5.2, 2023-12-18
 
 * fixed: automatic updates on multisite websites

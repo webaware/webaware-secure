@@ -53,7 +53,7 @@ final class Updater {
 		$current = $this->getPluginData();
 		$latest = $this->getLatestVersionInfo();
 
-		if ($latest && version_compare($current['Version'], $latest->version, '<')) {
+		if ($latest) {
 			$update = new stdClass;
 			$update->id				= '0';
 			$update->url			= $latest->homepage;
@@ -63,9 +63,14 @@ final class Updater {
 			$update->requires		= $latest->requires;
 			$update->requires_php	= $latest->requires_php;
 			$update->package		= $latest->download_link;
-			$update->upgrade_notice	= $latest->upgrade_notice;
 
-			$plugins->response[$this->name] = $update;
+			if (version_compare($current['Version'], $latest->version, '<')) {
+				$update->upgrade_notice = $latest->upgrade_notice;
+				$plugins->response[$this->name] = $update;
+			}
+			else {
+				$plugins->no_update[$this->name] = $update;
+			}
 		}
 
 		return $plugins;
